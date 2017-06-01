@@ -102,7 +102,7 @@ function isLibraryDriver(driverName) {
     return false;
 }
 
-class LocalForage {
+export class LocalForage {
     constructor(options) {
         this.INDEXEDDB = DriverType.INDEXEDDB;
         this.LOCALSTORAGE = DriverType.LOCALSTORAGE;
