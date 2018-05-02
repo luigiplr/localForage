@@ -1,3 +1,15 @@
+/*!
+    localForage -- Offline Storage, Improved
+    Version 1.7.1
+    https://localforage.github.io/localForage
+    (c) 2013-2017 Mozilla, Apache License 2.0
+*/
+/*!
+    localForage -- Offline Storage, Improved
+    Version 1.7.1
+    https://localforage.github.io/localForage
+    (c) 2013-2017 Mozilla, Apache License 2.0
+*/
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
         define('localforage', ['exports', './utils/isIndexedDBValid', './utils/isWebSQLValid', './utils/isLocalStorageValid', './drivers/indexeddb', './drivers/websql', './drivers/localstorage', './utils/serializer', './utils/promise', './utils/executeTwoCallbacks'], factory);
@@ -38,7 +50,7 @@
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
-            default: obj
+            "default": obj
         };
     }
 
@@ -85,11 +97,11 @@
     // as the name of the database because it's not the one we'll operate on,
     // but it's useful to make sure its using the right spec.
     // See: https://github.com/mozilla/localForage/issues/128
-    driverSupport[DriverType.INDEXEDDB] = (0, _isIndexedDBValid2.default)();
+    driverSupport[DriverType.INDEXEDDB] = (0, _isIndexedDBValid2["default"])();
 
-    driverSupport[DriverType.WEBSQL] = (0, _isWebSQLValid2.default)();
+    driverSupport[DriverType.WEBSQL] = (0, _isWebSQLValid2["default"])();
 
-    driverSupport[DriverType.LOCALSTORAGE] = (0, _isLocalStorageValid2.default)();
+    driverSupport[DriverType.LOCALSTORAGE] = (0, _isLocalStorageValid2["default"])();
 
     var isArray = Array.isArray || function (arg) {
         return Object.prototype.toString.call(arg) === '[object Array]';
@@ -150,7 +162,7 @@
             this._dbInfo = null;
 
             this._wrapLibraryMethodsWithReady();
-            this.setDriver(this._config.driver).catch(function () {});
+            this.setDriver(this._config.driver)["catch"](function () {});
         }
 
         // Set any config values for localForage; can be called anytime before
@@ -201,7 +213,7 @@
 
 
         LocalForage.prototype.defineDriver = function defineDriver(driverObject, callback, errorCallback) {
-            var promise = new _promise2.default(function (resolve, reject) {
+            var promise = new _promise2["default"](function (resolve, reject) {
                 try {
                     var driverName = driverObject._driver;
                     var complianceError = new Error('Custom driver not compliant; see ' + 'https://mozilla.github.io/localForage/#definedriver');
@@ -247,7 +259,7 @@
                 }
             });
 
-            (0, _executeTwoCallbacks2.default)(promise, callback, errorCallback);
+            (0, _executeTwoCallbacks2["default"])(promise, callback, errorCallback);
             return promise;
         };
 
@@ -257,15 +269,15 @@
 
         LocalForage.prototype.getDriver = function getDriver(driverName, callback, errorCallback) {
             var self = this;
-            var getDriverPromise = _promise2.default.resolve().then(function () {
+            var getDriverPromise = _promise2["default"].resolve().then(function () {
                 if (isLibraryDriver(driverName)) {
                     switch (driverName) {
                         case self.INDEXEDDB:
-                            return _indexeddb2.default;
+                            return _indexeddb2["default"];
                         case self.LOCALSTORAGE:
-                            return _localstorage2.default;
+                            return _localstorage2["default"];
                         case self.WEBSQL:
-                            return _websql2.default;
+                            return _websql2["default"];
                     }
                 } else if (CustomDrivers[driverName]) {
                     return CustomDrivers[driverName];
@@ -273,13 +285,13 @@
                     throw new Error('Driver not found.');
                 }
             });
-            (0, _executeTwoCallbacks2.default)(getDriverPromise, callback, errorCallback);
+            (0, _executeTwoCallbacks2["default"])(getDriverPromise, callback, errorCallback);
             return getDriverPromise;
         };
 
         LocalForage.prototype.getSerializer = function getSerializer(callback) {
-            var serializerPromise = _promise2.default.resolve(_serializer2.default);
-            (0, _executeTwoCallbacks2.default)(serializerPromise, callback);
+            var serializerPromise = _promise2["default"].resolve(_serializer2["default"]);
+            (0, _executeTwoCallbacks2["default"])(serializerPromise, callback);
             return serializerPromise;
         };
 
@@ -294,7 +306,7 @@
                 return self._ready;
             });
 
-            (0, _executeTwoCallbacks2.default)(promise, callback, callback);
+            (0, _executeTwoCallbacks2["default"])(promise, callback, callback);
             return promise;
         };
 
@@ -331,12 +343,12 @@
                             self._dbInfo = null;
                             self._ready = null;
 
-                            return self.getDriver(driverName).then(extendSelfWithDriver).catch(driverPromiseLoop);
+                            return self.getDriver(driverName).then(extendSelfWithDriver)["catch"](driverPromiseLoop);
                         }
 
                         setDriverToConfig();
                         var error = new Error('No available storage method found.');
-                        self._driverSet = _promise2.default.reject(error);
+                        self._driverSet = _promise2["default"].reject(error);
                         return self._driverSet;
                     }
 
@@ -347,9 +359,9 @@
             // There might be a driver initialization in progress
             // so wait for it to finish in order to avoid a possible
             // race condition to set _dbInfo
-            var oldDriverSetDone = this._driverSet !== null ? this._driverSet.catch(function () {
-                return _promise2.default.resolve();
-            }) : _promise2.default.resolve();
+            var oldDriverSetDone = this._driverSet !== null ? this._driverSet["catch"](function () {
+                return _promise2["default"].resolve();
+            }) : _promise2["default"].resolve();
 
             this._driverSet = oldDriverSetDone.then(function () {
                 var driverName = supportedDrivers[0];
@@ -362,14 +374,14 @@
                     self._wrapLibraryMethodsWithReady();
                     self._initDriver = initDriver(supportedDrivers);
                 });
-            }).catch(function () {
+            })["catch"](function () {
                 setDriverToConfig();
                 var error = new Error('No available storage method found.');
-                self._driverSet = _promise2.default.reject(error);
+                self._driverSet = _promise2["default"].reject(error);
                 return self._driverSet;
             });
 
-            (0, _executeTwoCallbacks2.default)(this._driverSet, callback, errorCallback);
+            (0, _executeTwoCallbacks2["default"])(this._driverSet, callback, errorCallback);
             return this._driverSet;
         };
 
@@ -409,5 +421,5 @@
         return LocalForage;
     }();
 
-    exports.default = new LocalForage();
+    exports["default"] = new LocalForage();
 });
