@@ -2,7 +2,8 @@
 [![Build Status](https://travis-ci.org/localForage/localForage.svg?branch=master)](http://travis-ci.org/localForage/localForage)
 [![NPM version](https://badge.fury.io/js/localforage.svg)](http://badge.fury.io/js/localforage)
 [![Dependency Status](https://img.shields.io/david/localForage/localForage.svg)](https://david-dm.org/localForage/localForage)
-[![npm](https://img.shields.io/npm/dm/localforage.svg?maxAge=2592000)]()
+[![npm](https://img.shields.io/npm/dm/localforage.svg?maxAge=2592000)](https://npmcharts.com/compare/localforage?minimal=true)
+[![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/localforage/badge?style=rounded)](https://www.jsdelivr.com/package/npm/localforage)
 
 localForage is a fast and simple storage library for JavaScript. localForage
 improves the offline experience of your web app by using asynchronous storage
@@ -26,12 +27,6 @@ Download the [latest localForage from GitHub](https://github.com/localForage/loc
 npm install localforage
 ```
 
-or [bower](http://bower.io):
-
-```bash
-bower install localforage
-```
-
 localForage is compatible with [browserify](http://browserify.org/).
 
 [supported browsers]: https://github.com/localForage/localForage/wiki/Supported-Browsers-Platforms
@@ -39,15 +34,15 @@ localForage is compatible with [browserify](http://browserify.org/).
 ## Support
 
 Lost? Need help? Try the
-[localForage API documentation](https://localforage.github.io/localForage).
+[localForage API documentation](https://localforage.github.io/localForage). [localForage API文档也有中文版。](https://localforage.docschina.org)
 
-If you're stuck using the library, running the tests, or want to contribute
+If you're having trouble using the library, running the tests, or want to contribute
 to localForage, you can visit
 [irc.freenode.net](https://freenode.net/) and head to the `#localforage`
 channel to ask questions about localForage.
 
-The best person to ask about localForage is [**tofumatt**][tofumatt], who
-is usually online from 8am-8pm GMT (London Time).
+You can ask [**tofumatt**][tofumatt] about localForage in IRC, who
+is usually online from 10am-8pm GMT.
 
 [tofumatt]: http://tofumatt.com/
 
@@ -105,7 +100,7 @@ JSON, as well as ArrayBuffers, Blobs, and TypedArrays. Check the
 All types are supported in every storage backend, though storage limits in
 localStorage make storing many large Blobs impossible.
 
-[api]: https://localforage.github.io/localForage/#setitem
+[api]: https://localforage.github.io/localForage/#data-api-setitem
 
 ## Configuration
 
@@ -201,8 +196,10 @@ models in your framework so you can store data offline with localForage. We
 have drivers for the following frameworks:
 
 * [AngularJS](https://github.com/ocombe/angular-localForage)
+* [Angular 4 and up](https://github.com/Alorel/ngforage/)
 * [Backbone](https://github.com/localForage/localForage-backbone)
 * [Ember](https://github.com/genkgo/ember-localforage-adapter)
+* [Vue](https://github.com/dmlzj/vlf)
 
 If you have a driver you'd like listed, please
 [open an issue](https://github.com/localForage/localForage/issues/new) to have it
@@ -211,7 +208,7 @@ added to this list.
 ## Custom Drivers
 
 You can create your own driver if you want; see the
-[`defineDriver`](https://localforage.github.io/localForage/#definedriver) API docs.
+[`defineDriver`](https://localforage.github.io/localForage/#driver-api-definedriver) API docs.
 
 There is a [list of custom drivers on the wiki][custom drivers].
 

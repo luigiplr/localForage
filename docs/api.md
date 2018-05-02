@@ -367,7 +367,7 @@ Set and persist localForage options. This must be called *before* any other call
   </dd>
   <dt>version</dt>
   <dd>
-    The version of your database. May be used for upgrades in the future; currently unused.<br>
+    The schema version of your database. Used only in WebSQL and IndexedDB. In WebSQL, this simply sets the version, and in IndexedDB this may trigger an <code>onupgradeneeded</code> event if a version upgrade is detected. If a new store is detected, localForage will ask IndexedDB to increment the version itself to manually trigger the <code>onupgradeneeded</code> event. As of right now, upgrade events are not customizable, but may be in the future. For drivers that do not support configuration for versioning, this value simply gets thrown away.<br>
     Default: <code>1.0</code>
   </dd>
   <dt>description</dt>
@@ -440,7 +440,7 @@ localforage.driver();
 
 `driver()`
 
-Returns the name of the driver being used, or `null` if none can be used.
+Returns the name of the driver being used, `null` during the asynchronous driver initialization process (see <a href="#driver-api-ready"><code>ready</code></a> for more details), or `null` if the asynchronous driver initialization process failed to find a usable driver.
 
 <aside class="notice">
   In case that a driver fails during or right after the initialization process, then localForage will try to use the next in order driver. That is with respect to the default driver order while loading localForage or to the order the drivers were passed to `setDriver()`.
@@ -496,3 +496,28 @@ otherStore.setItem("key", "value2");
 ```
 
 Creates a new instance of localForage and returns it. Each object contains its own database and doesn't affect other instances of localForage.
+
+## dropInstance
+
+```js
+localforage.dropInstance().then(function() {
+  console.log('Dropped the store of the current instance').
+});
+
+localforage.dropInstance({
+  name: "otherName",
+  storeName: "otherStore"
+}).then(function() {
+  console.log('Dropped otherStore').
+});
+
+localforage.dropInstance({
+  name: "otherName"
+}).then(function() {
+  console.log('Dropped otherName database').
+});
+```
+
+When invoked with no arguments, it drops the "store" of the current instance.
+When invoked with an object specifying both `name` and `storeName` properties, it drops the specified "store".
+When invoked with an object specifying only a `name` property, it drops the specified "database" (and all its stores).
