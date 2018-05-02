@@ -2229,6 +2229,8 @@ var LocalForage = function () {
 
 
     LocalForage.prototype.defineDriver = function defineDriver(driverObject, callback, errorCallback) {
+        var _this = this;
+
         var promise = new Promise$1(function (resolve, reject) {
             try {
                 var driverName = driverObject._driver;
@@ -2275,10 +2277,10 @@ var LocalForage = function () {
                 configureMissingMethods();
 
                 var setDriverSupport = function setDriverSupport(support) {
-                    if (this.DefinedDrivers[driverName]) {
+                    if (_this.DefinedDrivers[driverName]) {
                         console.info('Redefining LocalForage driver: ' + driverName);
                     }
-                    this.DefinedDrivers[driverName] = driverObject;
+                    _this.DefinedDrivers[driverName] = driverObject;
                     DriverSupport[driverName] = support;
                     // don't use a then, so that we can define
                     // drivers that have simple _support methods
