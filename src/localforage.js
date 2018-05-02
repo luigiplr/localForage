@@ -153,8 +153,8 @@ class LocalForage {
 
     // Used to define a custom driver, shared across all instances of
     // localForage.
-    defineDriver = (driverObject, callback, errorCallback) => {
-        const promise = new Promise(function(resolve, reject) {
+    defineDriver(driverObject, callback, errorCallback) {
+        const promise = new Promise((resolve, reject) => {
             try {
                 const driverName = driverObject._driver;
                 const complianceError = new Error(
@@ -254,20 +254,20 @@ class LocalForage {
 
         executeTwoCallbacks(promise, callback, errorCallback);
         return promise;
-    };
+    }
 
     driver() {
         return this._driver || null;
     }
 
-    getDriver = (driverName, callback, errorCallback) => {
+    getDriver(driverName, callback, errorCallback) {
         const getDriverPromise = this.DefinedDrivers[driverName]
             ? Promise.resolve(this.DefinedDrivers[driverName])
             : Promise.reject(new Error("Driver not found."));
 
         executeTwoCallbacks(getDriverPromise, callback, errorCallback);
         return getDriverPromise;
-    };
+    }
 
     getSerializer(callback) {
         const serializerPromise = Promise.resolve(serializer);
